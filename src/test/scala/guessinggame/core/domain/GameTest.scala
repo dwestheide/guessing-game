@@ -50,12 +50,12 @@ object GameTest extends SimpleTestSuite {
   private def createNumber(n: Int): GuessableNumber =
     GuessableNumber
       .fromInt(n)
-      .getOrElse(sys.error("Guess should be defined"))
+      .getOrElse(sys.error("Guessable number must be between 1 and 100"))
 
   private def createGame(targetNumber: Int): Game =
     Game
       .fromTargetNumber(targetNumber)
-      .getOrElse(sys.error("Game should be defined"))
+      .getOrElse(sys.error("Target number must be between 1 and 100"))
 
   private def assertWrong(result: Result, check: Wrong => Boolean): Unit =
     result match {
@@ -72,7 +72,7 @@ object GameTest extends SimpleTestSuite {
     if (attempts > 1) {
       game.processGuess(guess) match {
         case res @ (Success | GameOver) => res
-        case Wrong(nextState, targetIsLower) =>
+        case Wrong(nextState, _) =>
           performGuess(nextState, guess, attempts - 1)
       }
     } else game.processGuess(guess)
