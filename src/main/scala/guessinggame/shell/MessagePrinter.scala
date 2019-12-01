@@ -1,6 +1,6 @@
 package guessinggame.shell
 
-import guessinggame.core.domain.GuessableNumber
+import guessinggame.core.domain.{GuessableNumber, Hint}
 import guessinggame.core.presentation.Presentation
 
 import java.io.PrintStream
@@ -19,8 +19,8 @@ private[shell] class MessagePrinter(out: PrintStream = System.out) {
 
   def showHint(
       guess: GuessableNumber,
-      targetIsLower: Boolean
-  ): Unit = out.println(Presentation.hint(guess, targetIsLower))
+      hint: Hint
+  ): Unit = out.println(Presentation.hint(guess, hint))
 
   def showProblemWithSetup(): Unit = println(Presentation.problemWithSetup)
 }

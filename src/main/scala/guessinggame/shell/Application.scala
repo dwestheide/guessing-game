@@ -28,8 +28,8 @@ private[shell] class Application(
         game.processGuess(guess) match {
           case Result.GameOver => showGameOverMessage()
           case Result.Success  => showSuccessMessage(game.targetNumber)
-          case Result.Wrong(nextState, targetIsLower) =>
-            showHint(guess, targetIsLower)
+          case Result.Wrong(nextState, hint) =>
+            showHint(guess, hint)
             loop(nextState)
         }
     }

@@ -36,12 +36,12 @@ object GameTest extends SimpleTestSuite {
   test("Processing guess that is too high") {
     val (game, guess) = setupTest(target = 50, guess = 51)
     val endResult     = performGuess(game, guess, 1)
-    assertWrong(endResult, _.targetIsLower)
+    assertWrong(endResult, _.hint == Hint.TooHigh)
   }
   test("Processing guess that is too low") {
     val (game, guess) = setupTest(target = 50, guess = 49)
     val endResult     = performGuess(game, guess, 1)
-    assertWrong(endResult, wrong => !wrong.targetIsLower)
+    assertWrong(endResult, _.hint == Hint.TooLow)
   }
 
   private def setupTest(target: Int, guess: Int): (Game, GuessableNumber) =
