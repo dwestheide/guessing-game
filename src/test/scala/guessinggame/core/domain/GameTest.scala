@@ -71,9 +71,9 @@ object GameTest extends SimpleTestSuite {
   ): Result =
     if (attempts > 1) {
       game.processGuess(guess) match {
-        case res @ (Success | GameOver) => res
-        case Wrong(nextState, _) =>
-          performGuess(nextState, guess, attempts - 1)
+        case Success        => Success
+        case GameOver       => GameOver
+        case Wrong(next, _) => performGuess(next, guess, attempts - 1)
       }
     } else game.processGuess(guess)
 }
